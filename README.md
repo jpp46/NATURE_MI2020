@@ -4,7 +4,7 @@ This repository contains the source code for the experiments performed, and simu
 It consists of four main parts: 1. the [Voxelyze](https://github.com/jonhiller/Voxelyze) physics simulator. 2. A Julia wrapper made by one of the authors for the Voxelyze physics engine 3. The source code for creating the robot model. 4. The source code for running the experiments described in the paper.
 
 # Dependencies
-1. Supported operating systems: use a version of Linux or a version of macOS. We have fully tested the code on macOS Catalina, and partially on Ubuntu 18.04.
+1. Supported operating systems: use a version of Linux or a version of macOS. We have fully tested the code on macOS Mojave, and partially on Ubuntu 18.04.
 
 2. Make sure you have a C/C++ compiler and [make](https://www.gnu.org/software/make/) installed on your system. The authors used Apple clang version 11.0.3 and GNU Make 3.81. However, GCC should also work.
 

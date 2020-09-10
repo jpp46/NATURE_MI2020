@@ -1,8 +1,8 @@
 VOXELYZE_NAME = voxelyze
 VOXELYZE_LIB_NAME = lib$(VOXELYZE_NAME)
 
-CC = /usr/local/opt/llvm/bin/clang++
-INCLUDE = -I./include -I/usr/local/opt/llvm/include -L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib -fopenmp
+CC = clang++
+INCLUDE = -I./include
 FLAGS = -std=c++17 -Ofast -DUSE_OMP=1 -fPIC $(INCLUDE)
 
 VOXELYZE_SRC = \

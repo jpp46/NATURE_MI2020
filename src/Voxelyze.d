@@ -10,7 +10,7 @@ Voxelyze.o: src/Voxelyze.cpp include/Voxelyze.h include/Array3D.h \
   include/rapidjson/prettywriter.h include/rapidjson/writer.h \
   include/rapidjson/internal/dtoa.h include/rapidjson/internal/itoa.h \
   include/rapidjson/stringbuffer.h include/VX_LinearSolver.h \
-  include/VX_MaterialLink.h
+  include/VX_MaterialLink.h /usr/local/include/omp.h
 
 include/Voxelyze.h:
 
@@ -65,3 +65,5 @@ include/rapidjson/stringbuffer.h:
 include/VX_LinearSolver.h:
 
 include/VX_MaterialLink.h:
+
+/usr/local/include/omp.h:
