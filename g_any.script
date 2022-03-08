@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --array=0-60
-#SBATCH --job-name="any 1"
+#SBATCH --job-name="any 5"
 #SBATCH --output=job_%j.out
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=powersj@msoe.edu
@@ -14,6 +14,6 @@
 ## SCRIPT START
 
 cd \$HOME/NATURE_MI2020/
-julia worker.jl ${SLURM_ARRAY_TASK_ID} 1
+julia worker.jl ${SLURM_ARRAY_TASK_ID} 5
 
 ## SCRIPT END
