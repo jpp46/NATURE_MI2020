@@ -1,12 +1,12 @@
-using Cxx
-using Libdl
+#using Cxx
+#using Libdl
 using LinearAlgebra
 using Colors
 using StatsBase
 using HypothesisTests
 
 using BSON: @save, @load
-include("pancakerobot.jl")
+#include("pancakerobot.jl")
 
 fit = 0
 values_hill = []

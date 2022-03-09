@@ -1,0 +1,31 @@
+dt=0.00010602478421508119
+step_per_act≈11670
+
+nsteps=>64032
+fitness((0, MAX_PRESS, empty_matrix), 0, true)=>0.07726235687732697
+
+nsteps=>64032
+fitness((90, MAX_PRESS, empty_matrix), 15, true)=>-0.008344123139977455
+
+nsteps=>64032
+fitness((0, 0, empty_matrix), 0, true)=>0.0797998309135437
+
+nsteps=>64032
+fitness((90, 0, empty_matrix), 15, true)=>0.1118868738412857
+
+nsteps=>186719
+fitness((90, 0, inch_matrix), 0, true)=>0.37412548065185547
+0.06757865137335914 BLs
+
+nsteps=>186719
+fitness((90, 0, inch_matrix), 15, true)=>0.22105324268341064
+0.02506514803666195 BLs
+
+nsteps=>186719
+fitness((0, MAX_PRESS, roll_matrix), 0, true)=>0.8326765298843384
+0.17286428149265734 BLs
+
+nsteps=>186719
+fitness((0, MAX_PRESS, roll_matrix), 15, true)=>-2.466048002243042
+-0.5919068297615978 BLs
+
