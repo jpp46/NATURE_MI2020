@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#SBATCH --array=1-60
 #SBATCH --job-name="soro 0"
 #SBATCH --output=job_%j.out
 #SBATCH --mail-type=ALL

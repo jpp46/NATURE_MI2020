@@ -1,9 +1,9 @@
 using Base
 
-run(`sbatch g0.script`)
-run(`sbatch g15.script`)
-run(`sbatch g0_closed.script`)
-run(`sbatch g15_closed.script`)
-run(`sbatch g0_semi.script`)
-run(`sbatch g15_semi.script`)
-run(`sbatch grh.script`)
+run(`sbatch --array=1-60 g0.script`)
+run(`sbatch --array=1-60 g15.script`)
+run(`sbatch --array=1-60 g0_closed.script`)
+run(`sbatch --array=1-60 g15_closed.script`)
+run(`sbatch --array=1-60 g0_semi.script`)
+run(`sbatch --array=1-60 g15_semi.script`)
+run(`sbatch --array=1-60 grh.script`)
