@@ -600,7 +600,7 @@ roll_matrix = [
 		]
 
 function run_hill(slope)
-	path = "extra/0_roll_hill"
+	path = "extra/roll_hill"
 	
 	f, nt = fitness((0, MAX_PRESS, roll_matrix), slope, true)
 	file = open("$(path).csv", "a")
