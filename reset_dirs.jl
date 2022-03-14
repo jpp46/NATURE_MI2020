@@ -48,7 +48,7 @@ for j in 0:60
 end
 
 
-for i in 0:15
+for i in [0, 15]
 	run(`mkdir genomes_$i`)
 	for j in 0:60
 		DIR = "genomes_$i/worker_$(lpad(j, 2, "0"))"

@@ -1,17 +1,14 @@
-#using Cxx
-#using Libdl
 using LinearAlgebra
 using Colors
 using StatsBase
 using HypothesisTests
 
 using BSON: @save, @load
-#include("pancakerobot.jl")
 
 fit = 0
 values_hill = []
 for i in 1:60
-	global fit
+	global fit, values_hill
 	DIR = "genomes_roll_hill/worker_$(lpad(i, 2, "0"))"
 	@load "$DIR/$(lpad(200, 4, "0")).bson" worker fit
 	push!(values_hill, fit)
@@ -19,7 +16,7 @@ end
 
 values_15 = []
 for i in 1:60
-	global fit
+	global fit, values_15
 	DIR = "genomes_15/worker_$(lpad(i, 2, "0"))"
 	@load "$DIR/$(lpad(200, 4, "0")).bson" worker fit
 	push!(values_15, fit)

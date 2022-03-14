@@ -4,7 +4,7 @@ using LinearAlgebra
 using StatsBase
 using Colors
 using Random
-using Makie
+using GLMakie
 using Formatting
 
 using BSON: @save, @load
@@ -354,7 +354,7 @@ function run(sim, frame_rate)
 			setGlobalDamping(sim.skinMat, 0.01)
 			setGlobalDamping(sim.intraMat, 0.01)
 			map(increaseFric, sim.varMat)
-			k = 0
+			#=k = 0
 			for t in 1:800
 				for j in 1:8
 					if act[j] == 1
@@ -367,7 +367,7 @@ function run(sim, frame_rate)
 					push!(nodes, getMesh(pMesh))
 				end
 				k += 1
-			end
+			end=#
 			for j in 0:4000
 				step(sim)
 				if j % frame_rate == 0
@@ -461,23 +461,30 @@ function actuation_matrix(genome)
 	return act_mat
 end
 
-function fitness(genome, env, frame_rate, name, direct=true)
+function fitness(genome, env, frame_rate, fname, direct=true)
 	sim = Sim(0.01, 15, 22, 400000, 3000)
 	setEnv(sim, env, genome[1])
 	setPressure(sim, genome[2])
 	setActuactionMatrix(sim, genome[3])
 	nodes = initialize(sim, frame_rate)
 	nodes = [nodes..., (run(sim, frame_rate))...]
-	scene = surface(range(-15, stop=15, length=1000), range(-15, stop=15, length=1000), randn(1000, 1000).*0.0001 .- 0.01, colormap=:Spectral)
-	n = Node(nodes[1])
-	scene.center = false
-	mesh!(scene, lift(x -> x[1], n), lift(x -> x[2], n), color=lift(x -> x[3], n), show_axis = false, center = false)
-	update_cam!(scene, eyepos(nodes[1][1], genome[1]), lookat(nodes[1][1]))
-	if env == 15 rotate_cam!(scene, 0.0, 0.0, -0.25) end
-	record(scene, "$(name).webm", 2:length(nodes)) do i
-		n[] = nodes[i];
-		update_cam!(scene, eyepos(nodes[i][1], genome[1]), lookat(nodes[i][1]))
-		if env == 15 rotate_cam!(scene, 0.0, 0.0, -0.25) end
+
+	coordinates = Observable(nodes[1][1])
+	connectivity = Observable(nodes[1][2])
+	colors = Observable(nodes[1][3])
+
+	
+	figure, axis, plot = mesh(coordinates, connectivity, color=colors, show_axis=false)
+	surface!(axis.scene, range(-10, stop=10, length=400), range(-10, stop=10, length=400), randn(400, 400).*0.0001 .- 0.01, colormap=:Spectral)
+	update_cam!(axis.scene, eyepos(nodes[1][1], genome[1]), lookat(nodes[1][1]))
+	if env == 15 rotate_cam!(axis.scene, 0.0, 0.0, -0.25) end
+	record(figure, "$(fname).mp4", 1:length(nodes)) do i
+		coordinates[] = nodes[i][1]
+		connectivity[] = nodes[i][2]
+		colors[] = nodes[i][3]
+		notify.((coordinates, connectivity, colors))
+		update_cam!(axis.scene, eyepos(nodes[i][1], genome[1]), lookat(nodes[i][1]))
+		if env == 15 rotate_cam!(axis.scene, 0.0, 0.0, -0.25) end
 	end
 
 	pMesh = MeshRender(sim.Vx)
@@ -488,23 +495,29 @@ function fitness(genome, env, frame_rate, name, direct=true)
 	return dot(cm, vector_dir)
 end
 
-function fitness(genome, env, frame_rate, name)
+function fitness(genome, env, frame_rate, fname)
 	sim = Sim(0.01, 15, 22, 400000, 3000)
 	setEnv(sim, env, genome[1])
 	setPressure(sim, genome[2])
 	setActuactionMatrix(sim, actuation_matrix(genome[3]))
 	nodes = initialize(sim, frame_rate)
 	nodes = [nodes..., (run(sim, frame_rate))...]
-	scene = surface(range(-15, stop=15, length=1000), range(-15, stop=15, length=1000), randn(1000, 1000).*0.0001 .- 0.01, colormap=:Spectral)
-	n = Node(nodes[1])
-	scene.center = false
-	mesh!(scene, lift(x -> x[1], n), lift(x -> x[2], n), color=lift(x -> x[3], n), show_axis = false, center = false)
-	update_cam!(scene, eyepos(nodes[1][1], genome[1]), lookat(nodes[1][1]))
-	if env == 15 rotate_cam!(scene, 0.0, 0.0, -0.25) end
-	record(scene, "$(name).webm", 2:length(nodes)) do i
-		n[] = nodes[i];
-		update_cam!(scene, eyepos(nodes[i][1], genome[1]), lookat(nodes[i][1]))
-		if env == 15 rotate_cam!(scene, 0.0, 0.0, -0.25) end
+	
+	coordinates = Observable(nodes[1][1])
+	connectivity = Observable(nodes[1][2])
+	colors = Observable(nodes[1][3])
+
+	figure, axis, plot = mesh(coordinates, connectivity, color=colors, show_axis=false)
+	surface!(axis.scene, range(-10, stop=10, length=400), range(-10, stop=10, length=400), randn(400, 400).*0.0001 .- 0.01, colormap=:Spectral)
+	update_cam!(axis.scene, eyepos(nodes[1][1], genome[1]), lookat(nodes[1][1]))
+	if env == 15 rotate_cam!(axis.scene, 0.0, 0.0, -0.25) end
+	record(figure, "$(fname).mp4", 1:length(nodes)) do i
+		coordinates[] = nodes[i][1]
+		connectivity[] = nodes[i][2]
+		colors[] = nodes[i][3]
+		notify.((coordinates, connectivity, colors))
+		update_cam!(axis.scene, eyepos(nodes[i][1], genome[1]), lookat(nodes[i][1]))
+		if env == 15 rotate_cam!(axis.scene, 0.0, 0.0, -0.25) end
 	end
 
 	pMesh = MeshRender(sim.Vx)

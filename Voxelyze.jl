@@ -1,14 +1,4 @@
-#=@everywhere using Cxx
-@everywhere using Libdl
-@everywhere using LinearAlgebra
-@everywhere using StatsBase
-@everywhere using Makie=#
-
 # Voxelyze.jl a wrapper around the Voxelyze Library
-
-
-
-
 
 #######################################################
 ################## LOADING LIBRARY ####################
@@ -21,9 +11,6 @@ addHeaderDir(path_to_header, kind=C_System)
 Libdl.dlopen(path_to_lib * "/libvoxelyze.so", Libdl.RTLD_GLOBAL)
 cxxinclude("Voxelyze.h")
 cxxinclude("My_MeshRender.h")
-
-
-
 
 #######################################################
 ################### TYPES & ENUMS #####################
@@ -80,9 +67,6 @@ PPP = @cxx CVX_Voxel::PPP 									# Positive X direction, Positive Y direction,
 
 # CVX_MeshRender type
 meshT = Cxx.CxxCore.CppValue{Cxx.CxxCore.CxxQualType{Cxx.CxxCore.CppBaseType{:CVX_MeshRender},(false, false, false)},80}
-
-
-
 
 #######################################################
 ################# VOXELYZE FUNCTIONS ##################
@@ -455,23 +439,14 @@ function eyepos(points::Matrix{Float32}, aoa)
 	          (minimum(points[:, 2]) + maximum(points[:, 2])) / 2,
 	          (minimum(points[:, 3]) + maximum(points[:, 3])) / 2]
 	x, y = (0.4*cosd(90+aoa), 0.4*sind(90+aoa))
-	#=if env == 0
-		xpos =  (minimum(points[:, 1]) + maximum(points[:, 1])) / 2
-		ypos =  -0.3
-		zpos =  (minimum(points[:, 3]) + maximum(points[:, 3])) / 2
-	elseif env == 15
-		xpos =  0.5
-		ypos =  (minimum(points[:, 2]) + maximum(points[:, 2])) / 2
-		zpos =  (minimum(points[:, 3]) + maximum(points[:, 3])) / 2
-	end=#
-	return Vec3f0(origin[1]-x, origin[2]-y, origin[3])
+	return Vec3f(origin[1]-x, origin[2]-y, origin[3])
 end
 
 function lookat(points::Matrix{Float32})
 		xpos =  (minimum(points[:, 1]) + maximum(points[:, 1])) / 2
 		ypos =  (minimum(points[:, 2]) + maximum(points[:, 2])) / 2
 		zpos =  (minimum(points[:, 3]) + maximum(points[:, 3])) / 2
-	return Vec3f0(xpos, ypos, zpos)
+	return Vec3f(xpos, ypos, zpos)
 end
 
 function getPoints(voxels)

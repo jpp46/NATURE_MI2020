@@ -6,9 +6,9 @@ This repository contains the source code for the experiments performed, and simu
 It consists of four main parts: 1. the [Voxelyze](https://github.com/jonhiller/Voxelyze) physics simulator. 2. A Julia wrapper made by one of the authors for the Voxelyze physics engine 3. The source code for creating the robot model. 4. The source code for running the experiments described in the paper.
 
 # Dependencies
-1. Supported operating systems: use a version of Linux or a version of macOS. We have fully tested the code on macOS Mojave, and partially on Ubuntu 18.04.
+1. Supported operating systems: use a version of Linux or a version of macOS. We have fully tested the code on macOS Mojave, and everything but the graphics on Ubuntu 18.04.
 
-2. Make sure you have a C/C++ compiler and [make](https://www.gnu.org/software/make/) installed on your system. The authors used Apple clang version 11.0.3 and GNU Make 3.81. However, GCC should also work.
+2. Make sure you have a C/C++ compiler and [make](https://www.gnu.org/software/make/) installed on your system. The authors used Apple clang version 11.0.3 and GNU Make 3.81. However, GCC should also work (version 7.5.0 tested).
 
 3. Install version v1.3.1 of the [Julia programming language](https://julialang.org/downloads/oldreleases/)
 
@@ -18,11 +18,7 @@ julia> ]
 ```
 Then, install the following packages with the add command:
 ```julia
-add Cxx
-add Libdl
-add StatsBase
-add Colors
-add BSON
+add Cxx Libdl StatsBase Statistics Colors BSON Plots PyPlot DataFrames CSV Makie GLMakie Formatting
 ```
 
 You should now have all of the tools required to run the code.
@@ -39,6 +35,7 @@ git clone https://github.com/jpp46/NATURE_MI2020
 
 ```bash
 cd NATURE_MI2020
+make clean
 make
 ```
 
@@ -54,6 +51,7 @@ The 3 files **worker.jl**, **worker_semi.jl**, and **worker_closed.jl** can be u
 - worker.jl runs the completely open experiment where the shape, orientation and control of the robot are all optimized by the algorithm.
 - worker_semi.jl runs the experiment where only shape, and control undergo optimization, while orientation was set as a constant.
 - worker_closed.jl runs the experiment where only control is optimized, with orientation and shape being set as constants.
+- worker_roll_hill.jl runs the experiment where the robot is forced to try and discover a strategy for moving up hill when inflated and oriented length wise to the hill.
 
 All of these files can be run in the following manner:
 ```bash
@@ -73,18 +71,7 @@ add HypothosisTests
 ```
 This file runs a Welsh's t-test on the treatments described in the simulation results section of the manuscript.
 
-To run the file **make_graphs.jl**, you will need to install the latest version of gnuplot. On a mac, this can be done with brew.
-```bash
-brew install gnuplot
-```
-Sometimes **make_graphs.jl** fails to save the plot correctly. If that happens, you can run the script manually using gnuplot.
-```bash
-gnuplot
-gnuplot> (paste lines 1-43 of **make_graphs.jl** here)
-# save plot manually and close pop-up terminal
-gnuplot> (paste lines 45-64 of **make_graphs.jl** here)
-# save plot manually and exit
-```
+The file **make_graphs.jl** will produce the graphs made for the evolutionary trials and **extra/graph.jl** will make the graphs that show the effects of friction on the speed of the hand desgined inching control policy.
 
 # Additional Details About Voxelyze.jl
 

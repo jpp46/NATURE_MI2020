@@ -3,29 +3,33 @@ step_per_act≈11670
 
 nsteps=>64032
 fitness((0, MAX_PRESS, empty_matrix), 0, true)=>0.07726235687732697
+BLs=>0.017739826224249362
 
 nsteps=>64032
 fitness((90, MAX_PRESS, empty_matrix), 15, true)=>-0.008344123139977455
+BLs=>-0.0019158526930774513
 
 nsteps=>64032
 fitness((0, 0, empty_matrix), 0, true)=>0.0797998309135437
+BLs=>0.01832244304142077
 
 nsteps=>64032
 fitness((90, 0, empty_matrix), 15, true)=>0.1118868738412857
+BLs=>0.02568978968465025
 
 nsteps=>186719
 fitness((90, 0, inch_matrix), 0, true)=>0.37412548065185547
-0.06757865137335914 BLs
+BLs=>0.08590109441477992
 
 nsteps=>186719
 fitness((90, 0, inch_matrix), 15, true)=>0.22105324268341064
-0.02506514803666195 BLs
+BLs=>0.0507549377213122
 
 nsteps=>186719
 fitness((0, MAX_PRESS, roll_matrix), 0, true)=>0.8326765298843384
-0.17286428149265734 BLs
+BLs=>0.19118672453407812
 
 nsteps=>186719
 fitness((0, MAX_PRESS, roll_matrix), 15, true)=>-2.466048002243042
--0.5919068297615978 BLs
+BLs=>-0.5662170400769476
 
