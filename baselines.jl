@@ -8,9 +8,10 @@ using Random
 include("pancakerobot.jl")
 l = 0.22
 t = 19.796841683855746
+dt= 0.00010602478421508119
 
 file = open("extra/baselines.txt", "w")
-write(file, "dt=0.00010602478421508119\n")
+write(file, "dt=$dt\nstep_per_act≈11670\n\n")
 
 f, nt = fitness((0, MAX_PRESS, empty_matrix), 0, true)
 write(file, "nsteps=>$nt\nfitness((0, MAX_PRESS, empty_matrix), 0, true)=>$f\nBLs=>$((f/l)/t)\n\n")

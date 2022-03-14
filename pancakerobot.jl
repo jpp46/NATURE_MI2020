@@ -354,20 +354,6 @@ function run(sim, frame_rate)
 			setGlobalDamping(sim.skinMat, 0.01)
 			setGlobalDamping(sim.intraMat, 0.01)
 			map(increaseFric, sim.varMat)
-			#=k = 0
-			for t in 1:800
-				for j in 1:8
-					if act[j] == 1
-						done[j] = deflate(sim.sacsMat[j], sim.coef)
-					end
-				end
-				step(sim)
-				if k % frame_rate == 0
-					generateMesh(pMesh)
-					push!(nodes, getMesh(pMesh))
-				end
-				k += 1
-			end=#
 			for j in 0:4000
 				step(sim)
 				if j % frame_rate == 0
@@ -534,14 +520,21 @@ function fitness(genome, env, direct=true)
 	setPressure(sim, genome[2])
 	setActuactionMatrix(sim, genome[3])
 	initialize(sim)
+
+	pMesh = MeshRender(sim.Vx)
+	generateMesh(pMesh)
+	vertices = getMesh(pMesh)[1]
+	cm_prev = mean(vertices, dims=1)
+
 	nt = run(sim)
 
 	pMesh = MeshRender(sim.Vx)
 	generateMesh(pMesh)
 	vertices = getMesh(pMesh)[1]
 	cm = mean(vertices, dims=1)
+	
 	vector_dir = polar_cart(1, 90, genome[1])
-	return dot(cm, vector_dir), nt
+	return dot(cm, vector_dir) - dot(cm_prev, vector_dir), nt
 end
 
 function fitness(genome, env)
@@ -550,14 +543,21 @@ function fitness(genome, env)
 	setPressure(sim, genome[2])
 	setActuactionMatrix(sim, actuation_matrix(genome[3]))
 	initialize(sim)
+
+	pMesh = MeshRender(sim.Vx)
+	generateMesh(pMesh)
+	vertices = getMesh(pMesh)[1]
+	cm_prev = mean(vertices, dims=1)
+
 	nt = run(sim)
 
 	pMesh = MeshRender(sim.Vx)
 	generateMesh(pMesh)
 	vertices = getMesh(pMesh)[1]
 	cm = mean(vertices, dims=1)
+	
 	vector_dir = polar_cart(1, 90, genome[1])
-	return dot(cm, vector_dir), nt
+	return dot(cm, vector_dir) - dot(cm_prev, vector_dir), nt
 end
 
 empty_matrix = [

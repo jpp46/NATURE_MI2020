@@ -8,11 +8,11 @@ using Random
 using BSON: @save, @load
 include("pancakerobot.jl")
 
-#fitness((90, 0, inch_matrix), 0, 30, "graphs/inch_flat", true)
-#fitness((90, 0, inch_matrix), 15, 30, "graphs/inch_hill", true)
+fitness((90, 0, inch_matrix), 0, 30, "graphs/inch_flat", true)
+fitness((90, 0, inch_matrix), 15, 30, "graphs/inch_hill", true)
 
-#fitness((0, MAX_PRESS, roll_matrix), 0, 30, "graphs/roll_flat", true)
-#fitness((0, MAX_PRESS, roll_matrix), 15, 30, "graphs/roll_hill", true)
+fitness((0, MAX_PRESS, roll_matrix), 0, 30, "graphs/roll_flat", true)
+fitness((0, MAX_PRESS, roll_matrix), 15, 30, "graphs/roll_hill", true)
 
 # Get the best robot from each sample
 for E in [0, 15]
