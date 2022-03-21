@@ -1,4 +1,4 @@
-using Statistics
+using Random, Statistics
 using BSON: @load
 
 using Plots

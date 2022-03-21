@@ -11,7 +11,7 @@ plot!(plt, x, y,
 	title=nothing, legend=:none,
 	grid=false, linecolor=:black
 )
-#plot!(plt, x, zeros(length(x)), linestyle=:dash, linecolor=:black)
+plot!(plt, x, zeros(length(x)), linestyle=:dash, linecolor=:black)
 savefig(plt, "fig_d.png")
 
 

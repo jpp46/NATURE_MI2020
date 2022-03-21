@@ -12,7 +12,7 @@ const ID = parse(Int, ARGS[1])
 const ARG_ENV = parse(Int, ARGS[2])
 const GENERATIONS = 200
 const RATE = [90/10, MAX_PRESS/10, 9/10]
-const DIR = "genomes_$(ARG_ENV)"
+const DIR = "genomes_semi_$(ARG_ENV)"
 
 RNG = Random.MersenneTwister(ID*10000)
 

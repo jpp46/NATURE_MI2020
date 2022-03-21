@@ -1,6 +1,6 @@
 include("pancakerobot.jl")
 
-file = open("extra/extra/roll_hill.csv", "w")
+file = open("extra/roll_hill.csv", "w")
 write(file, "slope, distance, time, BL\n")
 close(file)
 

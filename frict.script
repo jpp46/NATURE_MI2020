@@ -12,7 +12,6 @@
 
 ## SCRIPT START
 
-cd \$HOME/NATURE_MI2020/
 julia s_frict.jl
 julia c_frict.jl
 
