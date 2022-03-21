@@ -1,0 +1,12 @@
+/var/spool/slurm/d/job46669/slurm_script: line 15: cd: $HOME/NATURE_MI2020/: No such file or directory
+
+signal (7): Bus error
+in expression starting at /home/powersj/NATURE_MI2020/worker.jl:82
+_ZN8CVX_Link12updateForcesEv at /home/powersj/NATURE_MI2020/lib/libvoxelyze.so (unknown line)
+_ZN9CVoxelyze10doTimeStepEf at /home/powersj/NATURE_MI2020/lib/libvoxelyze.so (unknown line)
+unknown function (ip: 0x7f1e522d3310)
+macro expansion at /home/powersj/.julia/packages/Cxx/1RaOv/src/codegen.jl:845 [inlined]
+cppcall_member at /home/powersj/.julia/packages/Cxx/1RaOv/src/codegen.jl:845 [inlined]
+doTimeStep at /home/powersj/NATURE_MI2020/Voxelyze.jl:83
+unknown function (ip: 0x7f1e522d32da)
+/var/spool/slurm/d/job46669/slurm_script: line 16: 44017 Bus error               (core dumped) julia worker.jl ${SLURM_ARRAY_TASK_ID} 0
