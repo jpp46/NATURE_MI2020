@@ -1,7 +1,7 @@
 VOXELYZE_NAME = voxelyze
 VOXELYZE_LIB_NAME = lib$(VOXELYZE_NAME)
 
-CC = g++
+CC = clang++
 INCLUDE = -I./include
 FLAGS = -std=c++17 -Ofast -fPIC $(INCLUDE)
 

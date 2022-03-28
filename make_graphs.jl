@@ -1,4 +1,4 @@
-using Random, Statistics
+using Random, Statistics, DataFrames, CSV
 using BSON: @load
 
 using Plots
@@ -23,17 +23,29 @@ function get_data(folder)
 	return data
 end
 
+function write_data(path, data)
+	df = DataFrame([:g => 0:200]..., [Symbol("f_$i") => data[i, :] for i in 1:60]...)
+	CSV.write(path, df)
+end
+
 data_0 = get_data("genomes_0")
 println("0 Open => Max: $((maximum(data_0, dims=1)[1, end]/len)/time), Mean: $((mean(data_0, dims=1)[1, end]/len)/time)")
 data_semi_0 = get_data("genomes_semi_0")
 println("0 Semi => Max: $((maximum(data_semi_0, dims=1)[1, end]/len)/time), Mean: $((mean(data_semi_0, dims=1)[1, end]/len)/time)")
 data_closed_0 = get_data("genomes_closed_0")
 println("0 Closed => Max: $((maximum(data_closed_0, dims=1)[1, end]/len)/time), Mean: $((mean(data_closed_0, dims=1)[1, end]/len)/time)")
+write_data("extra/flat_open.csv", data_0)
+write_data("extra/flat_semi.csv", data_semi_0)
+write_data("extra/flat_closed.csv", data_closed_0)
+
 maxx = maximum([maximum(data_0), maximum(data_semi_0), maximum(data_closed_0)])
 minx = minimum([minimum(data_0), minimum(data_semi_0), minimum(data_closed_0)])
 data_0 = normalize(data_0, minx, maxx)
 data_semi_0 = normalize(data_semi_0, minx, maxx)
 data_closed_0 = normalize(data_closed_0, minx, maxx)
+write_data("extra/flat_open_n.csv", data_0)
+write_data("extra/flat_semi_n.csv", data_semi_0)
+write_data("extra/flat_closed_n.csv", data_closed_0)
 
 mx = maximum(data_0, dims=1)
 m = mean(data_0, dims=1)
@@ -75,11 +87,18 @@ data_semi_15 = get_data("genomes_semi_15")
 println("15 Semi => Max: $((maximum(data_semi_15, dims=1)[1, end]/len)/time), Mean: $((mean(data_semi_15, dims=1)[1, end]/len)/time)")
 data_closed_15 = get_data("genomes_closed_15")
 println("15 Closed => Max: $((maximum(data_closed_15, dims=1)[1, end]/len)/time), Mean: $((mean(data_closed_15, dims=1)[1, end]/len)/time)")
+write_data("extra/hill_open.csv", data_15)
+write_data("extra/hill_semi.csv", data_semi_15)
+write_data("extra/hill_closed.csv", data_closed_15)
+
 maxx = maximum([maximum(data_15), maximum(data_semi_15), maximum(data_closed_15)])
 minx = minimum([minimum(data_15), minimum(data_semi_15), minimum(data_closed_15)])
 data_15 = normalize(data_15, minx, maxx)
 data_semi_15 = normalize(data_semi_15, minx, maxx)
 data_closed_15 = normalize(data_closed_15, minx, maxx)
+write_data("extra/hill_open_n.csv", data_15)
+write_data("extra/hill_semi_n.csv", data_semi_15)
+write_data("extra/hill_closed_n.csv", data_closed_15)
 
 mx = maximum(data_15, dims=1)
 m = mean(data_15, dims=1)

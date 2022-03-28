@@ -4,7 +4,7 @@ using LinearAlgebra
 using StatsBase
 using Colors
 using Random
-#using GLMakie
+using GLMakie
 using Formatting
 
 using BSON: @save, @load
