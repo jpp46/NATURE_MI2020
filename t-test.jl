@@ -2,25 +2,28 @@ using LinearAlgebra
 using Colors
 using StatsBase
 using HypothesisTests
+using Random
 
-using BSON: @save, @load
+using BSON: @load
 
-fit = 0
 values_hill = []
 for i in 1:60
-	global fit, values_hill
-	DIR = "genomes_roll_hill/worker_$(lpad(i, 2, "0"))"
-	@load "$DIR/$(lpad(200, 4, "0")).bson" worker fit
+	global values_hill
+	DIR = "genomes_roll_hill/"
+	@load "$DIR/worker_$(lpad(i, 2, "0"))_results.bson" results
+	fit = results[end][3]
 	push!(values_hill, fit)
 end
 
 values_15 = []
 for i in 1:60
-	global fit, values_15
-	DIR = "genomes_15/worker_$(lpad(i, 2, "0"))"
-	@load "$DIR/$(lpad(200, 4, "0")).bson" worker fit
+	global values_hill
+	DIR = "genomes_15/"
+	@load "$DIR/worker_$(lpad(i, 2, "0"))_results.bson" results
+	fit = results[end][3]
 	push!(values_15, fit)
 end
+
 x = values_hill
 y = values_15
 nx, ny = length(x), length(y)
