@@ -34,26 +34,30 @@ data_semi_0 = get_data("genomes_semi_0")
 println("0 Semi => Max: $((maximum(data_semi_0)/len)/time), Mean: $((mean(data_semi_0, dims=1)[1, end]/len)/time)")
 data_closed_0 = get_data("genomes_closed_0")
 println("0 Closed => Max: $((maximum(data_closed_0)/len)/time), Mean: $((mean(data_closed_0, dims=1)[1, end]/len)/time)")
+
+data_0 = ((data_0./len)./time)
+data_semi_0 = ((data_semi_0./len)./time)
+data_closed_0 = ((data_closed_0./len)./time)
 write_data("extra/flat_open.csv", data_0)
 write_data("extra/flat_semi.csv", data_semi_0)
 write_data("extra/flat_closed.csv", data_closed_0)
 
-maxx = maximum([maximum(data_0), maximum(data_semi_0), maximum(data_closed_0)])
-minx = minimum([minimum(data_0), minimum(data_semi_0), minimum(data_closed_0)])
-data_0 = normalize(data_0, minx, maxx)
-data_semi_0 = normalize(data_semi_0, minx, maxx)
-data_closed_0 = normalize(data_closed_0, minx, maxx)
-write_data("extra/flat_open_n.csv", data_0)
-write_data("extra/flat_semi_n.csv", data_semi_0)
-write_data("extra/flat_closed_n.csv", data_closed_0)
+#maxx = maximum([maximum(data_0), maximum(data_semi_0), maximum(data_closed_0)])
+#minx = minimum([minimum(data_0), minimum(data_semi_0), minimum(data_closed_0)])
+#data_0 = normalize(data_0, minx, maxx)
+#data_semi_0 = normalize(data_semi_0, minx, maxx)
+#data_closed_0 = normalize(data_closed_0, minx, maxx)
+#write_data("extra/flat_open_n.csv", data_0)
+#write_data("extra/flat_semi_n.csv", data_semi_0)
+#write_data("extra/flat_closed_n.csv", data_closed_0)
 
 mx = maximum(data_0, dims=1)
 m = mean(data_0, dims=1)
 v = std(data_0, dims=1)
 plt = plot(0:200, m[:], ribbon=v[:],
-	title="Flat Surface", xlabel="Generations", ylabel="Normalized Fitness",
+	title="Flat Surface", xlabel="Generations", ylabel="BL/s",
 	label="Orientation,Shape,Control", legend=:none, grid=false,
-	linecolor=:blue, fill=:blue, fillalpha=0.15, ylims=(0.2,1.0)
+	linecolor=:blue, fill=:blue, fillalpha=0.15, ylims=(0.0,0.201)
 )
 plot!(plt, mx[:], linecolor=:blue, linestyle=:dash, label=nothing)
 
@@ -61,9 +65,9 @@ mx = maximum(data_semi_0, dims=1)
 m = mean(data_semi_0, dims=1)
 v = std(data_semi_0, dims=1)
 plot!(plt, 0:200, m[:], ribbon=v[:],
-	title="Flat Surface", xlabel="Generations", ylabel="Normalized Fitness",
+	title="Flat Surface", xlabel="Generations", ylabel="BL/s",
 	label="Shape,Control", legend=:none, grid=false,
-	linecolor=:green, fill=:green, fillalpha=0.15, ylims=(0.2,1.0)
+	linecolor=:green, fill=:green, fillalpha=0.15, ylims=(0.0,0.201)
 )
 plot!(plt, mx[:], linecolor=:green, linestyle=:dash, label=nothing)
 
@@ -71,9 +75,9 @@ mx = maximum(data_closed_0, dims=1)
 m = mean(data_closed_0, dims=1)
 v = std(data_closed_0, dims=1)
 plot!(plt, 0:200, m[:], ribbon=v[:],
-	title="Flat Surface", xlabel="Generations", ylabel="Normalized Fitness",
+	title="Flat Surface", xlabel="Generations", ylabel="BL/s",
 	label="Control", legend=:none, grid=false,
-	linecolor=:red, fill=:red, fillalpha=0.15, ylims=(0.2,1.0)
+	linecolor=:red, fill=:red, fillalpha=0.15, ylims=(0.0,0.201)
 )
 plot!(plt, mx[:], linecolor=:red, linestyle=:dash, label=nothing)
 savefig(plt, "graphs/flat.png")
@@ -87,26 +91,30 @@ data_semi_15 = get_data("genomes_semi_15")
 println("15 Semi => Max: $((maximum(data_semi_15)/len)/time), Mean: $((mean(data_semi_15, dims=1)[1, end]/len)/time)")
 data_closed_15 = get_data("genomes_closed_15")
 println("15 Closed => Max: $((maximum(data_closed_15)/len)/time), Mean: $((mean(data_closed_15, dims=1)[1, end]/len)/time)")
+
+data_15 = ((data_15./len)./time)
+data_semi_15 = ((data_semi_15./len)./time)
+data_closed_15 = ((data_closed_15./len)./time)
 write_data("extra/hill_open.csv", data_15)
 write_data("extra/hill_semi.csv", data_semi_15)
 write_data("extra/hill_closed.csv", data_closed_15)
 
-maxx = maximum([maximum(data_15), maximum(data_semi_15), maximum(data_closed_15)])
-minx = minimum([minimum(data_15), minimum(data_semi_15), minimum(data_closed_15)])
-data_15 = normalize(data_15, minx, maxx)
-data_semi_15 = normalize(data_semi_15, minx, maxx)
-data_closed_15 = normalize(data_closed_15, minx, maxx)
-write_data("extra/hill_open_n.csv", data_15)
-write_data("extra/hill_semi_n.csv", data_semi_15)
-write_data("extra/hill_closed_n.csv", data_closed_15)
+#maxx = maximum([maximum(data_15), maximum(data_semi_15), maximum(data_closed_15)])
+#minx = minimum([minimum(data_15), minimum(data_semi_15), minimum(data_closed_15)])
+#data_15 = normalize(data_15, minx, maxx)
+#data_semi_15 = normalize(data_semi_15, minx, maxx)
+#data_closed_15 = normalize(data_closed_15, minx, maxx)
+#write_data("extra/hill_open_n.csv", data_15)
+#write_data("extra/hill_semi_n.csv", data_semi_15)
+#write_data("extra/hill_closed_n.csv", data_closed_15)
 
 mx = maximum(data_15, dims=1)
 m = mean(data_15, dims=1)
 v = std(data_15, dims=1)
 plt = plot(0:200, m[:], ribbon=v[:],
-	title="Inclined Surface", xlabel="Generations", ylabel="Normalized Fitness",
+	title="Inclined Surface", xlabel="Generations", ylabel="BL/s",
 	label="Orientation,Shape,Control", legend=:bottomright, grid=false,
-	linecolor=:blue, fill=:blue, fillalpha=0.15, ylims=(0.8,1.0)
+	linecolor=:blue, fill=:blue, fillalpha=0.15, ylims=(-0.075,0.016)
 )
 plot!(plt, mx[:], linecolor=:blue, linestyle=:dash, label=nothing)
 
@@ -114,9 +122,9 @@ mx = maximum(data_semi_15, dims=1)
 m = mean(data_semi_15, dims=1)
 v = std(data_semi_15, dims=1)
 plot!(plt, 0:200, m[:], ribbon=v[:],
-	title="Inclined Surface", xlabel="Generations", ylabel="Normalized Fitness",
+	title="Inclined Surface", xlabel="Generations", ylabel="BL/s",
 	label="Shape,Control", legend=:bottomright, grid=false,
-	linecolor=:green, fill=:green, fillalpha=0.15, ylims=(0.8,1.0)
+	linecolor=:green, fill=:green, fillalpha=0.15, ylims=(-0.075,0.016)
 )
 plot!(plt, mx[:], linecolor=:green, linestyle=:dash, label=nothing)
 
@@ -124,9 +132,9 @@ mx = maximum(data_closed_15, dims=1)
 m = mean(data_closed_15, dims=1)
 v = std(data_closed_15, dims=1)
 plot!(plt, 0:200, m[:], ribbon=v[:],
-	title="Inclined Surface", xlabel="Generations", ylabel="Normalized Fitness",
+	title="Inclined Surface", xlabel="Generations", ylabel="BL/s",
 	label="Control", legend=:bottomright, grid=false,
-	linecolor=:red, fill=:red, fillalpha=0.15, ylims=(0.8,1.0)
+	linecolor=:red, fill=:red, fillalpha=0.15, ylims=(-0.075,0.016)
 )
 plot!(plt, mx[:], linecolor=:red, linestyle=:dash, label=nothing)
 savefig(plt, "graphs/hill.png")
